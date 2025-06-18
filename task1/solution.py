@@ -2,12 +2,11 @@ def strict(func):
     def wrapper(*args):
         annotations = func.__annotations__
         for name, value in zip(annotations, args):
-            if name in annotations:
-                expected_type = annotations[name]
-                if type(value) is not expected_type:
-                    raise TypeError(
-                        f"Argument '{name}' must be of type {expected_type.__name__}, got {type(value).__name__}"
-                    )
+            expected_type = annotations[name]
+            if type(value) is not expected_type:
+                raise TypeError(
+                    f"Argument '{name}' must be of type {expected_type.__name__}, got {type(value).__name__}"
+                )
         return func(*args)
     return wrapper
 
