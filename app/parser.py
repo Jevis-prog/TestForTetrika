@@ -6,7 +6,9 @@ import requests
 from bs4 import BeautifulSoup, Tag
 
 from app.config import BASE_URL
+from logger import setup_logger
 
+logger = setup_logger()
 
 def is_russian_letter(letter: str) -> bool:
     return re.fullmatch(r"[А-ЯЁ]", letter.upper()) is not None
@@ -46,6 +48,7 @@ def scrape_animals_by_letter(start_url: str) -> dict[str, int]:
             letter_counts[letter] += count
 
         next_page = soup.find("a", string="Следующая страница")
+        logger.info(f'Переход на следующую страницу: {next_page}')
         if isinstance(next_page, Tag) and "href" in next_page.attrs:
             href_value = next_page["href"]
             if isinstance(href_value, (list | tuple)):
