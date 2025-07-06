@@ -1,0 +1,17 @@
+Приложение парсит данные с главной страницы википедии "Животные",
+считает сколько всего животных на каждую букву алфавита и записывает эти данные в beasts.csv
+
+pip install poetry
+
+poetry env use C:\Users\USERNAME\AppData\Local\Programs\Python\Python312\python.exe
+
+poetry shell
+
+poetry install
+
+$env:PYTHONPATH = (Get-Location).Path
+
+For windows
+    choco install make
+
+make fmt lint test
